@@ -77,9 +77,11 @@ See also [What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-G
 
 ## Everyday Git commands you need on the PowerShell prompt, with examples
 
-The Git command line interface consists of the command `git` followed by a subcommand and the corresponding arguments and options. It can seem a little overwealming all at one, so let's focus on the basic workflows. See the further information section below provides resources to take you further
+The Git command line interface consists of the command `git` followed by a sub-command and the corresponding arguments and options.
+There are many sub-commands anm a myriad of options so it can seem a little overwhelming all at one and so we will focus on the basic workflows.
+The further information section below provides resources to take you further
 
-# Important (sub)commands
+### Important (sub)commands
 
 - [init](https://git-scm.com/docs/git-init) or [clone](https://git-scm.com/docs/git-clone)
     - `init` allows you to initliase a new git repo inside a project that is not already under version control e.g.
@@ -107,16 +109,16 @@ The Git command line interface consists of the command `git` followed by a subco
 
 ## What to read or watch next
 
-    [The Git Parable](https://tom.preston-werner.com/2009/05/19/the-git-parable.html). An introduction to the concepts behind Git
+* [The Git Parable](https://tom.preston-werner.com/2009/05/19/the-git-parable.html). An introduction to the concepts behind Git
 
-    [Book](https://git-scm.com/book/)
+* [Book](https://git-scm.com/book/)
 
-    A series of short videos introducing Git on PowerShell
-    [https://www.youtube.com/playlist?list=PLwNoYdA7KMWn0eLRG6lvp2Ir2npoCjRth](https://www.youtube.com/playlist?list=PLwNoYdA7KMWn0eLRG6lvp2Ir2npoCjRth)
+* A series of short videos introducing Git on PowerShell [![Video Playlist](https://img.youtube.com/vi/PLwNoYdA7KMWn0eLRG6lvp2Ir2npoCjRth/0.jpg)](https://www.youtube.com/playlist?list=PLwNoYdA7KMWn0eLRG6lvp2Ir2npoCjRth)
 
-    A nice, but rapid, intro to VCS, Git and GitHub for web projects — but applies to any type of project
-    [https://youtu.be/1u2qu-EmIRc?t=463](https://youtu.be/1u2qu-EmIRc?t=463)
 
-    For people who use https, how to avoid keep entering your password
-    [Git - Credential Storage](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
+<! --[https://www.youtube.com/playlist?list=PLwNoYdA7KMWn0eLRG6lvp2Ir2npoCjRth](https://www.youtube.com/playlist?list=PLwNoYdA7KMWn0eLRG6lvp2Ir2npoCjRth) -->
 
+* A nice, but rapid, intro to VCS, Git and GitHub for web projects — but applies to any type of project
+[![Git for web developers](https://img.youtube.com/vi/1u2qu-EmIRc/0.jpg)](https://youtu.be/1u2qu-EmIRc?t=463)
+
+* For people who use https, how to avoid keep entering your password [Git - Credential Storage](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
