@@ -1,56 +1,70 @@
 # Git from the PowerShell Prompt
 
-
 ## Introduction
 
-    Most folks in IT (application developers, system administrators, security engineers,...) use and manage text files of various types all day, every day.
-    For example source code, scripts,  data files of various types (such as config settings stored in JSON or CSV files), application source code and so on.
-    Keeping track of changes, looking back at old versions and creating special purpose versions is unmanageable without a version control tool.
+Most folks in IT (application developers, system administrators, security engineers,...) use and manage text files of various types all day, every day.
+For example source code, scripts,  data files of various types (such as config settings stored in JSON or CSV files), application source code and so on.
+Keeping track of changes, looking back at old versions and creating special purpose versions is unmanageable without a version control tool.
 
-    [Git](https://git-scm.com/) is the world's most popular version control tool. This talk provides a novice introduction to using Git from the PowerShell prompt and no previous version control experience is assumed. As well as using Git locally, we will also look at storing version repositories on the GitHub cloud service.
+[Git](https://git-scm.com/) is the world's most popular version control tool. This talk provides a novice introduction to using Git from the PowerShell prompt and no previous version control experience is assumed. As well as using Git locally, we will also look at storing version repositories on the GitHub cloud service.
 
-    Because this is an introduction additional resources will be provided to take people further on their Git journey.
+Because this is an introduction additional resources will be provided to take people further on their Git journey.
 
-    Things we'll talk about
+Things we'll talk about
 
-    - What is the problem Git solves and how?
-    - A high level overview of Git
-    - Installing and configuring Git on Windows
-    - The ten everyday Git commands you need on the PowerShell prompt
-    - Storing and sharing your files on GitHub
-    - What to read next
+- What is the problem Git solves and how?
+- A high level overview of Git
+- Installing and configuring Git on Windows
+- The ten everyday Git commands you need on the PowerShell prompt
+- Storing and sharing your files on GitHub
+- What to read next
 
-    About Alec
+About Alec
 
-    Alec is an IT geek who currently works as a Developer Advocate at PaperCut Software in Melbourne, Australia. He's been using computers since the late '70s (an ICL 2904 mainframe) and he was a MS-DOS batch file (and later UNIX shell) wizard. More recently Alec has been learning PowerShell, he always has Windows Terminal open with both a PowerShell and WSL2 bash prompt available. Recently he installed VS Code on his arm64 Chrome OS tablet
+Alec is an IT geek who currently works as a Developer Advocate at PaperCut Software in Melbourne, Australia. He's been using computers since the late '70s (an ICL 2904 mainframe) and he was a MS-DOS batch file (and later UNIX shell) wizard. More recently Alec has been learning PowerShell, he always has Windows Terminal open with both a PowerShell and WSL2 bash prompt available. Recently he installed VS Code on his arm64 Chrome OS tablet
 
 ## What is the problem Git solves and how?
-    - It's hard or even impossible to keep track of all our important files, why they were changed, or create new versions for specific purposes. When we work in a team on different changes to a common set of files the complexity quickly becomes unmanageable.
-    - Version control is the process of recording the history of changes to files after they are modified. Users can go back in time, get old versions and identify where and why changes were introduced. This means that it’s easier to:
-        - protect against changes – accidental or otherwise – and undo a "bad" change
-        - track down problems and retrofit fixes to previous versions of files
-        - support multiple, simultaneous, changes to a common set of project files (parallel development)
-        - retrieve an older set of files (if requested by a customer or manager, for example)
-    - Version Control Systems (VCS) are not just for developers
-        - Anyone who manages changes to files
-        - People who need to work together
-        - Organisations who need to manage content or compliance
-    - Git provides
-        - Each developer with a local repository (repo):
-            - To keep a complete history of all the files in our project, the changes that occurred over time
-            - The ability to create branches with unique sets of isolated changes
-            - Commands to add new changes and recover old versions
-        - Git runs on Windows, Mac OS X, & Linux
-        - As well as a powerful tool for the individual developer, it provides a powerful model for cooperation in teams and across teams
-        - Code sharing sites like [GitLab](https://gitlab.com/), [GitHub](https://github.com/), and [BitBucket](https://bitbucket.org/) provide facilities for developers to co-operate across the Internet
-        - Each Git repo can connect and share code with other repos from the same project
-        - Technically Git repositories have a peer to peer relationship.
-          In practice developers commit to a single upstream repository and
-          multiple [workflows](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows) can be build on top of this model.
+
+- It's hard or even impossible to keep track of all our important files, why they were changed, or create new versions for specific purposes. When we work in a team on different changes to a common set of files the complexity quickly becomes unmanageable.
+- Version control is the process of recording the history of changes to files after they are modified. Users can go back in time, get old versions and identify where and why changes were introduced. This means that it’s easier to:
+    - protect against changes – accidental or otherwise – and undo a "bad" change
+    - track down problems and retrofit fixes to previous versions of files
+    - support multiple, simultaneous, changes to a common set of project files (parallel development)
+    - retrieve an older set of files (if requested by a customer or manager, for example)
+- Version Control Systems (VCS) are not just for developers
+    - Anyone who manages changes to files
+    - People who need to work together
+    - Organisations who need to manage content or compliance
+- Git provides
+    - Each developer with a local repository (repo):
+        - To keep a complete history of all the files in our project, the changes that occurred over time
+        - The ability to create branches with unique sets of isolated changes
+        - Commands to add new changes and recover old versions
+    - Git runs on Windows, Mac OS X, & Linux
+    - As well as a powerful tool for the individual developer, it provides a powerful model for cooperation in teams and across teams
+    - Code sharing sites like [GitLab](https://gitlab.com/), [GitHub](https://github.com/), and [BitBucket](https://bitbucket.org/) provide facilities for developers to co-operate across the Internet
+    - Each Git repo can connect and share code with other repos from the same project
+    - Technically Git repositories have a peer to peer relationship.
+        In practice developers commit to a single upstream repository and
+        multiple [workflows](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows) can be build on top of this model.
+
 ## Installing and configuring Git on Windows
+
+- `Install-Module` `git` & `posh-git`
+    - `git` the Git binaries
+    - `posh-git` provides tab completion, basic prompt customisation
+    - [Git Credential Manager for Windows](https://microsoft.github.io/Git-Credential-Manager-for-Windows/) (manual install at the moment) is also recommended. More info on credential managers [here](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
+- Set up three important config settings user name, email address, default init branch and editor. For example
+    - `git config —global user.name "Alec Clews"`
+    - `git config —global user.email alecclews@gmail.com`
+    - `git config --global init.defaultBranch main` (Needs Git 2.28 or above, more info [here](https://blog.papercut.com/renaming-the-git-master-branch/))
+    - `git config —global core.editor "code —wait"` (Example for VS Code)
+- Your config settings are stored in `$env:USERPROFILE\.gitconfig`
+- Want extra fancy? See [https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx](https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx)
 
 
 ## A high level overview of Git
+
 - Git is distributed and each repository clone has a (mostly) complete record of all changes
     - c.f. The Subversion VCS (and many others) is a centralised system with a single repo that all developers connect to make changes
 - Your local repo database is stored in `.git`, don't worry about it for now
