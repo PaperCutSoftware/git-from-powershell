@@ -1,11 +1,12 @@
 # Git from the PowerShell Prompt
 
-GitHub Repo: https://github.com/alecthegeek/git-from-powershell
-Tags: Git, Powershell, Presentation
+GitHub Repo: [https://github.com/alecthegeek/git-from-powershell](https://github.com/alecthegeek/git-from-powershell)
 
 - Introduction
 
-    Most folks in IT (application developers, system administrators, security engineers,...) use and manage text files of various types all day, every day. For example source code, scripts,  data files of various types (such as config settings stored in JSON or CSV files), application source code and so on. Keeping track of changes, looking back at old versions and creating special purpose versions is unmanageable without a version control tool.
+    Most folks in IT (application developers, system administrators, security engineers,...) use and manage text files of various types all day, every day.
+    For example source code, scripts,  data files of various types (such as config settings stored in JSON or CSV files), application source code and so on.
+    Keeping track of changes, looking back at old versions and creating special purpose versions is unmanageable without a version control tool.
 
     [Git](https://git-scm.com/) is the world's most popular version control tool. This talk provides a novice introduction to using Git from the PowerShell prompt and no previous version control experience is assumed. As well as using Git locally, we will also look at storing version repositories on the GitHub cloud service.
 
@@ -29,7 +30,7 @@ Tags: Git, Powershell, Presentation
     - Version control is the process of recording the history of changes to files after they are modified. Users can go back in time, get old versions and identify where and why changes were introduced. This means that it’s easier to:
         - protect against changes – accidental or otherwise – and undo a "bad" change
         - track down problems and retrofit fixes to previous versions of files
-        - support multiple, simulatanrous, changes to a common set of project files (parallel development)
+        - support multiple, simultaneous, changes to a common set of project files (parallel development)
         - retrieve an older set of files (if requested by a customer or manager, for example)
     - Version Control Systems (VCS) are not just for developers
         - Anyone who manages changes to files
@@ -40,14 +41,15 @@ Tags: Git, Powershell, Presentation
             - To keep a complete history of all the files in our project, the changes that occurred over time
             - The ability to create branches with unique sets of isolated changes
             - Commands to add new changes and recover old versions
-        - Details:
-            - Git runs on Windows, Mac OS X, & Linux
-            - As well as a powerful tool for the individual developer, it provides a powerful model for cooperation in teams and across teams
-            - Code sharing sites like [GitLab](https://gitlab.com/), [GitHub](https://github.com/), and [BitBucket](https://bitbucket.org/) provide facilities for developers to co-operate across the Internet
-            - Each Git repo can connect and share code with other repos from the same project
-            - Technically the
+        - Git runs on Windows, Mac OS X, & Linux
+        - As well as a powerful tool for the individual developer, it provides a powerful model for cooperation in teams and across teams
+        - Code sharing sites like [GitLab](https://gitlab.com/), [GitHub](https://github.com/), and [BitBucket](https://bitbucket.org/) provide facilities for developers to co-operate across the Internet
+        - Each Git repo can connect and share code with other repos from the same project
+        - Technically Git repositories have a peer to peer relationship.
+          In practice developers commit to a single upstream repository and
+          multiple [workflows](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows) can be build on top of this model.
 - Installing and configuring Git on Windows
-    - `Install-Module` or `choco install`  `git` & `posh-git`
+    - `Install-Module`  `git` & `posh-git` (Chocolaty installs also work)
         - `git` module gets you the Git binaries
         - `posh-git` provides tab completion, basic prompt customisation
         - [Git Credential Manager for Windows](https://microsoft.github.io/Git-Credential-Manager-for-Windows/) (manual install at the moment) is also recommended. More info on credential managers [here](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
