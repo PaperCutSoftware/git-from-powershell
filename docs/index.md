@@ -111,13 +111,15 @@ The further information section below provides resources to take you further
 
 * [The Git Parable](https://tom.preston-werner.com/2009/05/19/the-git-parable.html). An introduction to the concepts behind Git
 
-* [Book](https://git-scm.com/book/)
 
-* A series of short videos introducing Git on PowerShell
+[![Pro Git Book](https://git-scm.com/images/progit2.png)](https://git-scm.com/book/)
+
+
+A series of short videos introducing Git on PowerShell
 [![Video Playlist](https://img.youtube.com/vi/WBg9mlpzEYU/0.jpg)](https://www.youtube.com/playlist?list=PLwNoYdA7KMWn0eLRG6lvp2Ir2npoCjRth "A series of short videos introducing Git on PowerShell")
 
 
-* A nice, but rapid, intro to VCS, Git and GitHub for web projects — but applies to any type of project
+A nice, rapid, intro to VCS, Git and GitHub for web projects — applies to any type of project
 [![Git for web developers](https://img.youtube.com/vi/1u2qu-EmIRc/0.jpg)](https://youtu.be/1u2qu-EmIRc?t=463 "Rapid intro to VCS, Git and GitHub for web projects")
 
 * For people who use https, how to avoid keep entering your password [Git - Credential Storage](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
