@@ -1,9 +1,12 @@
 # Git from the PowerShell Prompt
 
+These notes support a demonstration and talk that introduces PowerShell users to Git and version control concepts.
+Links to more complete material are provided
+
 ## Introduction
 
-Most folks in IT (application developers, system administrators, security engineers,...) use and manage text files of various types all day, every day.
-For example source code, scripts,  data files of various types (such as config settings stored in JSON or CSV files), application source code and so on.
+Most folks in IT (application developers, system administrators, security engineers,...) create, and manage, text files of various types all day, every day.
+For example: scripts; data files of various types (such as config settings stored in JSON or CSV files); application source code and so on.
 Keeping track of changes, looking back at old versions and creating special purpose versions is unmanageable without a version control tool.
 
 [Git](https://git-scm.com/) is the world's most popular version control tool. This talk provides a novice introduction to using Git from the PowerShell prompt and no previous version control experience is assumed. As well as using Git locally, we will also look at storing version repositories on the GitHub cloud service.
@@ -18,6 +21,13 @@ Things we'll talk about
 - The ten everyday Git commands you need on the PowerShell prompt
 - Storing and sharing your files on GitHub
 - What to read next
+
+In the following explanations we will talk about developers and that means **you**, because you write PowerShell scripts.
+
+> If you write code you're a dev
+>
+> --<cite>[Thomas Rayner](https://thomasrayner.ca/)
+
 
 About Alec
 
@@ -34,13 +44,13 @@ Alec is an IT geek who currently works as a Developer Advocate at PaperCut Softw
 - Version Control Systems (VCS) are not just for developers
     - Anyone who manages changes to files
     - People who need to work together
-    - Organisations who need to manage content or compliance
+    - Organisations who need to manage content or satisfy compliance requirements
 - Git provides
     - Each developer with a local repository (repo):
         - To keep a complete history of all the files in our project, the changes that occurred over time
         - The ability to create branches with unique sets of isolated changes
         - Commands to add new changes and recover old versions
-    - Git runs on Windows, Mac OS X, & Linux
+    - Git runs on Windows, Mac OS X, and Linux
     - As well as a powerful tool for the individual developer, it provides a powerful model for cooperation in teams and across teams
     - Code sharing sites like [GitLab](https://gitlab.com/), [GitHub](https://github.com/), and [BitBucket](https://bitbucket.org/) provide facilities for developers to co-operate across the Internet
     - Each Git repo can connect and share code with other repos from the same project
@@ -50,27 +60,29 @@ Alec is an IT geek who currently works as a Developer Advocate at PaperCut Softw
 
 ## Installing and configuring Git on Windows
 
-- `Install-Module` `git` & `posh-git`
-    - `git` the Git binaries
-    - `posh-git` provides tab completion, basic prompt customisation
-    - [Git Credential Manager for Windows](https://microsoft.github.io/Git-Credential-Manager-for-Windows/) (manual install at the moment) is also recommended. More info on credential managers [here](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
+- `Install-Script Install-Git ; Install-Git.ps1 ; Install-Module posh-git ; Import-Module posh-git`
+    - `git`: the Git package for Windows. I prefer to use Chocolatym or download the [installer](https://git-scm.com/download/win).
+    - [`posh-git`](https://github.com/dahlbyk/posh-git/blob/master/README.md): provides tab completion and basic prompt customisation. Supports Windows PowerShell 5.x
+      or PowerShell Core 6+ on all platforms
+- [Git Credential Manager for Windows](https://microsoft.github.io/Git-Credential-Manager-for-Windows/) (manual install at the moment) is also recommended.
+  More info on   credential managers [here](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
 - Set up three important config settings user name, email address, default init branch and editor. For example
-    - `git config —global user.name "Alec Clews"`
-    - `git config —global user.email alecclews@gmail.com`
+    - `git config --global user.name "Alec Clews"`
     - `git config --global init.defaultBranch main` (Needs Git 2.28 or above, more info [here](https://blog.papercut.com/renaming-the-git-master-branch/))
-    - `git config —global core.editor "code —wait"` (Example for VS Code)
+    - `git config --global core.editor "code --wait"` ([VS Code](https://code.visualstudio.com/) example)
+    - More about setting `user.email`later
 - Your config settings are stored in `$env:USERPROFILE\.gitconfig`
 - Want extra fancy? See [https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx](https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx)
-
 
 ## A high level overview of Git
 
 - Git is distributed and each repository clone has a (mostly) complete record of all changes
-    - c.f. The Subversion VCS (and many others) is a centralised system with a single repo that all developers connect to make changes
+- Git repos either manage a working copy (e.g. a directory of project files on a developers workstation), or are bare repos (for instance located on GitHub) used to exchange changes between working copies and projent a whole of project view.
+    - c.f. The [Subversion](https://subversion.apache.org/) VCS (and many others) is a centralised system with a single repo that all developers connect to make changes
 - Your local repo database is stored in `.git`, don't worry about it for now
-- Repos are replicated (cloned) amongst multiple users, all with their own unique history.
-- Git maintaines information about the other repos that it shares changes with in remote tracking branches
-- All changes can be shared with other repos as needed, usually to an "upstream"  repo (by convention called origin)
+- Repos are replicated (cloned) amongst multiple users. So each repo has with their own unique history.
+- Git maintains information about the other repos that it shares changes with in [remote](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes) tracking branches
+- All changes can be shared with other repos as needed, usually to an "upstream" repo (by convention called `origin`)
 - Git can handle large numbers of files (for example the GNU/Linux kernel source code). However if you have very large binary files then Git (or other general purpose VCS tools) may not be your best choice, but see [Git Large File Storage](https://git-lfs.github.com/).
 
 See also [What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F)
@@ -111,15 +123,14 @@ The further information section below provides resources to take you further
 
 * [The Git Parable](https://tom.preston-werner.com/2009/05/19/the-git-parable.html). An introduction to the concepts behind Git
 
+* A nice, rapid, intro to VCS, Git and GitHub for web projects — applies to any type of project
 
-[![Pro Git Book](https://git-scm.com/images/progit2.png)](https://git-scm.com/book/)
+[![Git for web developers](https://img.youtube.com/vi/1u2qu-EmIRc/0.jpg)](https://youtu.be/1u2qu-EmIRc?t=463 "Rapid intro to VCS, Git and GitHub for web projects")
 
+* A series of short videos introducing Git on PowerShell
 
-A series of short videos introducing Git on PowerShell
 [![Video Playlist](https://img.youtube.com/vi/WBg9mlpzEYU/0.jpg)](https://www.youtube.com/playlist?list=PLwNoYdA7KMWn0eLRG6lvp2Ir2npoCjRth "A series of short videos introducing Git on PowerShell")
 
-
-A nice, rapid, intro to VCS, Git and GitHub for web projects — applies to any type of project
-[![Git for web developers](https://img.youtube.com/vi/1u2qu-EmIRc/0.jpg)](https://youtu.be/1u2qu-EmIRc?t=463 "Rapid intro to VCS, Git and GitHub for web projects")
+[![Pro Git Book](https://git-scm.com/images/progit2.png)](https://git-scm.com/book/)
 
 * For people who use https, how to avoid keep entering your password [Git - Credential Storage](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
