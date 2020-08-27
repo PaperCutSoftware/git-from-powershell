@@ -70,6 +70,7 @@ Alec is an IT geek who currently works as a Developer Advocate at PaperCut Softw
     - `git config --global user.name "Alec Clews"`
     - `git config --global init.defaultBranch main` (Needs Git 2.28 or above, more info [here](https://blog.papercut.com/renaming-the-git-master-branch/))
     - `git config --global core.editor "code --wait"` ([VS Code](https://code.visualstudio.com/) example)
+    - `git config --global core.autocrlf input` so that you [play nice with UNIX style line endings](https://code.visualstudio.com/docs/remote/troubleshooting#_resolving-git-line-ending-issues-in-containers-resulting-in-many-modified-files)
     - More about setting `user.email`later
 - Your config settings are stored in `$env:USERPROFILE\.gitconfig`
 - Want extra fancy? See [https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx](https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx)
