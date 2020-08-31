@@ -111,7 +111,7 @@ The further information section below provides resources to take you further
 
     Note that ALL changes, not just new files, need to be added to the Index (a.k.a Staging) before they can be committed
 
-    Files can be renamed or moved with `[git mv](https://git-scm.com/docs/git-mv) ...` and deleted with `[git rm](https://git-scm.com/docs/git-rm) ...`
+    Files can be renamed or moved with [`git mv ...`](https://git-scm.com/docs/git-mv), and deleted with [`git rm ...`](https://git-scm.com/docs/git-rm).
 
 - commit
 - checkout
@@ -133,5 +133,7 @@ The further information section below provides resources to take you further
 [![Video Playlist](https://img.youtube.com/vi/WBg9mlpzEYU/0.jpg)](https://www.youtube.com/playlist?list=PLwNoYdA7KMWn0eLRG6lvp2Ir2npoCjRth "A series of short videos introducing Git on PowerShell")
 
 [![Pro Git Book](https://git-scm.com/images/progit2.png)](https://git-scm.com/book/)
+
+[GitHub Hello World](https://guides.github.com/activities/hello-world/) Do code management on the web, no CLI needed
 
 * For people who use https, how to avoid keep entering your password [Git - Credential Storage](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)

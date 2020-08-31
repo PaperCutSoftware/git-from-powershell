@@ -1,23 +1,4 @@
 {
-	// Demo snippets 
-
-	// Place your git-from-powershell workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
-	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
-	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
-	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
-	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
-	// Placeholders with the same ids are connected.
-	// Example:
-	// "Print to console": {
-	// 	"scope": "javascript,typescript",
-	// 	"prefix": "log",
-	// 	"body": [
-	// 		"console.log('$1');",
-	// 		"$2"
-	// 	],
-	// 	"description": "Log output to console"
-	// }
-
 	"ex1":{
 		"scope": "powershell",
 		"prefix": "ex1",
@@ -51,6 +32,91 @@
   				"<Example goes here. Repeat this attribute for more than one example>:",
 				"#>:",
 		]
+	},
+	"ex3":{
+		"scope": "powershell",
+		"prefix": "ex3",
+		"body":[
+			"\\$epsonErrCount = (Select-String -Path c:\\tmp\\epsonOPS.log -Pattern error | Measure-Object).count",
+			"",
+			"if (\\$epsonErrCount -gt 0) {",
+			"	write-output \"Epson plugin has reported \\$epsonErrCount errors\"",
+			"}",
+			"",
+		]
+	},
+	"ex4":{
+		"scope": "powershell",
+		"prefix": "ex4",
+		"body":[
+			"if (Get-Service 'Epson Open Platform Solution for PaperCut' -ErrorAction SilentlyContinue) {",
+			"",
+			"	\\$epsonErrCount = (Select-String -Path c:\\tmp\\epsonOPS.log -Pattern error | Measure-Object).count",
+			"",
+			"	if (\\$epsonErrCount -gt 0) {",
+			"		write-output \"Epson plugin has reported \\$epsonErrCount errors\"",
+			"	} else {",
+			"		write-output \"Epson plugin reports no errors\"",
+			"	}",
+			"}",
+			"",
+		]
+	},
+	"ex5":{
+		"scope": "powershell",
+		"prefix": "ex5",
+		"body":[
+			"",
+			"Add-Type -Path \"\\$env:USERPROFILE\\.nuget\\packages\\kveer.xmlrpc\\1.1.1\\lib\\netstandard2.0\\Kveer.XmlRPC.dll\"",
+			"Add-Type -Path \"\\$PWD\\ServerCommandProxy\\bin\\Release\\netstandard2.0\\ServerCommandProxy.dll\"",
+			"",
+			"# If not localhost then this address will needs to be listed as allowed in PaperCut"
+			"\\$papercuthost = \"localhost\"",
+			"",
+			"\\$auth = \"token\" # Value defined in advanced config property \"auth.webservices.auth-token\". Should be random",
+			"",
+			"# Proxy object to call PaperCut Server API",
+			"\\$s = New-Object PaperCut.ServerCommandProxy(\\$papercuthost, 9191, \\$auth)",
+
+			"# Find the value of the Auth key in the PaperCut MF/NG config database",
+			"\\$authString = \\$s.GetConfigValue(\"health.api.key\")",
+			"",
+			"# Set up the http header for the health API ",
+			"\\$headers = @{'Authorization' = \\$authString}",
+			"",
+			"\\$uri = [Uri]\"http://localhost:9191/api/health\"",
+			"",
+			"# Generate the report",
+			"&{",
+			"  # Get a list of the processes running ",
+			"  Get-Service -DisplayName  *PaperCut* | Select-Object -Property name,status |",
+			"            ConvertTo-Html -Fragment -PreContent '<h2>PaperCut Processes</h2>'",
+			"",
+			"  \\$rsp = Invoke-RestMethod -Uri \\$uri -Method Get -Headers \\$headers",
+			"",
+			"  \\$rsp.applicationServer.systemInfo |",
+			"  ConvertTo-Html -As List -Fragment -PreContent '<h2>PaperCut Services Info</h2>'",
+			"",
+			"  Write-Output \"<p>Total Printers = \\$(\\$rsp.printers.count)</p>\"",
+			"  Write-Output \"<p>Total Devices = \\$(\\$rsp.devices.count)</p>\"",
+			" } | Out-File -FilePath .\\report1.html",
+			"",
+			" Invoke-Expression .\\report1.html",
+			"",
+		]
+	},
+	"ex6":{
+		"scope": "powershell",
+		"prefix": "ex6",
+		"body":[
+			"dotnet new classlib --name ServerCommandProxy",
+			"cd ServerCommandProxy",
+			"Remove-Item Class1.cs",
+			"Copy-Item 'C:\\Program Files\\PaperCut MF\\server\\examples\\webservices\\csharp\\ServerCommandProxy.cs'",
+			"dotnet add package Kveer.XmlRPC --version 1.1.1",
+			"dotnet build --configuration Release",
+			"cd ..",
+		]
 	}
-	
+
 }
