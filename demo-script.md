@@ -1,4 +1,4 @@
-# Demostration of Git at the PowerShell prompt
+# Demonstration of Git at the PowerShell prompt
 
 ## Config
 
@@ -21,11 +21,11 @@ All these settings are stored in `~/.gitconfig`
 
 1. Empty directory
 2. Add a first file (ex1)
-3. `ls`
+3. `Get-ChildItem`
 4. `git status`
 5. Create a new Git repo (project)  `git init`
-6. `ls`
-7. `ls -Force`
+6. `Get-ChildItem`
+7. `Get-ChildItem -Force`
 8. `git status`
 9. `git add <file>`
 10. `git status`
@@ -34,8 +34,23 @@ All these settings are stored in `~/.gitconfig`
 13. `git config user.email alecclews@gmail.com`
 14. `git commit --amend --reset-author`
 15. `git log`
-    
+
 **Ta Da!  We have a project under version control**
+
+## Ignore files we don't need to manage
+
+Add directories and files to a magic file called `.gitignore`
+
+For example
+
+1. `Write-Output "/.vscode/" > .gitignore`
+2. `git status`
+
+Now `.vscode` is ignored, but `.gitignore` is untracked
+
+3. `git add .gitignore`
+4. `git commit -m "Added gitignore file"`
+5. `git status`
 
 ## Make a change to our project
 
@@ -49,11 +64,11 @@ All these settings are stored in `~/.gitconfig`
 8. `git commit -m "Added comment block`
 9. `git log`
 
-# Use `git rm` and `git mv`
+## Use `git rm` and `git mv`
 
 **Setup**
 
-1. Add a spurious file `echo "some stuff" > file2`
+1. Add a spurious file `Write-Output "some stuff" > file2`
 2. `git add file2`
 3. `git commit -m "Silly file"`
 
@@ -63,11 +78,14 @@ All these settings are stored in `~/.gitconfig`
 2. Rename the report file with `git mv report.ps1 papercut-report.ps1`
 3. `git status`
 4. `git commit`
-5. `git show HEAD` and `git show HEAD^^`
+
+## See what a previous commit did
+
+`git show HEAD` and `git show HEAD^^`
 
 ## Work on a branch
 
-**Create a special version of Epson plugin
+__Create a special version of Epson plugin__
 
 1. Show all our branches `git branch -all`
 2. Create a new branch `git checkout -b epson`
@@ -105,17 +123,6 @@ All these settings are stored in `~/.gitconfig`
 10. Switch back to main `git checkout -`
 11. `gitk -all` -- epson has changes from `main`, but `main` does not have changes from `epson`
 
-##Ignore files that are not needed
-
-0. Make sure we are on the `epson` branch `git checkout epson`
-1. `git status`, see the report file that is not needed in VCS
-2. `echo "report1.html" > .gitignore`
-3. `git status`
-4. We are now ignoring the report file, but we need to commit the ignore list
-5. `git add .gitignore && git commit -m "Add ignore list"`
-6. Expect to see `.gitignore` files
-7. `git status`
-
 ## Rebase Epson changes on top of main
 
 0. Make sure we are on the `epson` branch `git checkout epson`
@@ -134,7 +141,9 @@ All these settings are stored in `~/.gitconfig`
 
 1. `git tag rel-1`
 2. Move to somewhere else in the commit tree `git checkout HEAD~5`
-
+3. Go back to our tag -- "a rock in a sea of change" `git checkout rel-1`
 
 ## Publish our work on GitHub
 
+1. Create an account on GitHib
+2. 

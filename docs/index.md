@@ -15,7 +15,7 @@ Because this is an introduction additional resources will be provided to take pe
 
 Things we'll talk about
 
-- What is the problem Git solves and how?
+- What are the problems Version Control Software (VCS) solves and how?
 - A high level overview of Git
 - Installing and configuring Git on Windows
 - The ten everyday Git commands you need on the PowerShell prompt
@@ -33,30 +33,31 @@ About Alec
 
 Alec is an IT geek who currently works as a Developer Advocate at PaperCut Software in Melbourne, Australia. He's been using computers since the late '70s (an ICL 2904 mainframe) and he was a MS-DOS batch file (and later UNIX shell) wizard. More recently Alec has been learning PowerShell, he always has Windows Terminal open with both a PowerShell and WSL2 bash prompt available. Recently he installed VS Code on his arm64 Chrome OS tablet
 
-## What is the problem Git solves and how?
+## What are the problems VCS solves and how?
 
-- It's hard or even impossible to keep track of all our important files, why they were changed, or create new versions for specific purposes. When we work in a team on different changes to a common set of files the complexity quickly becomes unmanageable.
-- Version control is the process of recording the history of changes to files after they are modified. Users can go back in time, get old versions and identify where and why changes were introduced. This means that it’s easier to:
+- It's hard or even impossible to keep track of all our important project files, why they were changed, or create new versions for specific purposes. When we work in a team on different changes to a common set of files the complexity quickly becomes unmanageable.
+
+- [Version Control](https://en.wikipedia.org/wiki/Version_control) is the process of recording the history of changes to files after they are modified. Users can go back in time, get old versions and identify where and why changes were introduced. This means that it’s easier to:
     - protect against changes – accidental or otherwise – and undo a "bad" change
     - track down problems and retrofit fixes to previous versions of files
     - support multiple, simultaneous, changes to a common set of project files (parallel development)
     - retrieve an older set of files (if requested by a customer or manager, for example)
+
 - Version Control Systems (VCS) are not just for developers
     - Anyone who manages changes to files
     - People who need to work together
     - Organisations who need to manage content or satisfy compliance requirements
-- Git provides
-    - Each developer with a local repository (repo):
-        - To keep a complete history of all the files in our project, the changes that occurred over time
-        - The ability to create branches with unique sets of isolated changes
-        - Commands to add new changes and recover old versions
-    - Git runs on Windows, Mac OS X, and Linux
-    - As well as a powerful tool for the individual developer, it provides a powerful model for cooperation in teams and across teams
-    - Code sharing sites like [GitLab](https://gitlab.com/), [GitHub](https://github.com/), and [BitBucket](https://bitbucket.org/) provide facilities for developers to co-operate across the Internet
-    - Each Git repo can connect and share code with other repos from the same project
-    - Technically Git repositories have a peer to peer relationship.
-        In practice developers commit to a single upstream repository and
-        multiple [workflows](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows) can be build on top of this model.
+
+
+- All version control systems provides developers with some form of database that records the changes to files
+as a set of revisions or snap shots in time
+    - The VCS database is often reffered to as the repository (repo)
+    - Adding a new collection of changes (for instance to fix a specific issue) is called a **commit**
+    - Obtaining the contents of a specifci commit from the repo is referred d to a **checkout**
+
+- As well as a powerful tool for the individual developer, it provides a powerful model for cooperation
+in teams and between teams
+
 
 ## Installing and configuring Git on Windows
 
@@ -77,13 +78,35 @@ Alec is an IT geek who currently works as a Developer Advocate at PaperCut Softw
 
 ## A high level overview of Git
 
+- Git provides
+    - Each developer with a local repository (repo):
+        - To keep a complete history of all the files in our project, the changes that occurred over time
+        - The ability to create branches with unique sets of isolated changes
+        - Commands to add new changes and recover old versions
+
+- Git runs on Windows, Mac OS X, and Linux
+
+- Code sharing sites like [GitLab](https://gitlab.com/), [GitHub](https://github.com/), and [BitBucket](https://bitbucket.org/) provide facilities for developers to co-operate across the Internet
+
+- Each Git repo can connect and share code with other repos from the same project
+
+- Technically Git repositories have a peer to peer relationship.
+        In practice developers commit to a single upstream repository and
+        multiple [workflows](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows) can be build on top of this model.
+
 - Git is distributed and each repository clone has a (mostly) complete record of all changes
+
 - Git repos either manage a working copy (e.g. a directory of project files on a developers workstation), or are bare repos (for instance located on GitHub) used to exchange changes between working copies and projent a whole of project view.
     - c.f. The [Subversion](https://subversion.apache.org/) VCS (and many others) is a centralised system with a single repo that all developers connect to make changes
+
 - Your local repo database is stored in `.git`, don't worry about it for now
+
 - Repos are replicated (cloned) amongst multiple users. So each repo has with their own unique history.
+
 - Git maintains information about the other repos that it shares changes with in [remote](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes) tracking branches
+
 - All changes can be shared with other repos as needed, usually to an "upstream" repo (by convention called `origin`)
+
 - Git can handle large numbers of files (for example the GNU/Linux kernel source code). However if you have very large binary files then Git (or other general purpose VCS tools) may not be your best choice, but see [Git Large File Storage](https://git-lfs.github.com/).
 
 See also [What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F)
@@ -102,7 +125,8 @@ The further information section below provides resources to take you further
         `git init <project_dir>`
 
     - `clone`  clones the complete history of a remote project. You can now work on a running project. For example, let's clone the Git repo for these examples onto our workstation
-    - `git clone[https://github.com/alecthegeek/git-from-powershell.git](https://github.com/alecthegeek/git-from-powershell.git)`
+    - `git clone https://github.com/alecthegeek/git-from-powershell.git`
+
 - [add](https://git-scm.com/docs/git-add) et al.
 
     Adding changes to a Git repo is a two stage process. All changes are staged in the index, before they’re committed into the repo.
@@ -114,6 +138,19 @@ The further information section below provides resources to take you further
     Files can be renamed or moved with [`git mv ...`](https://git-scm.com/docs/git-mv), and deleted with [`git rm ...`](https://git-scm.com/docs/git-rm).
 
 - commit
+    After a changes as been assembled in the index (using `git add`, `git mv`, and `git rm`) the change must be
+    committed into the repo with the [`git commit`](https://git-scm.com/docs/git-commit).
+
+    Notes:
+
+    1. **Before** committing your changes run any tests you have to make sure the change is correct
+    2. If you have an upstream repository that might have changes pull those 1st (more on `pull` later)
+    3. Provide a [useful commit message](https://chris.beams.io/posts/git-commit/)
+    > a well-crafted Git commit message is the best way to communicate context about a change to
+    > fellow developers (and indeed to [our] future selves).
+    > A diff will tell you what changed, but only the commit message can properly tell you why
+    > --<cite> [Chris Beams](https://chris.beams.io/)
+ 
 - checkout
 - pull & fetch
 - branch & merge
@@ -133,7 +170,5 @@ The further information section below provides resources to take you further
 [![Video Playlist](https://img.youtube.com/vi/WBg9mlpzEYU/0.jpg)](https://www.youtube.com/playlist?list=PLwNoYdA7KMWn0eLRG6lvp2Ir2npoCjRth "A series of short videos introducing Git on PowerShell")
 
 [![Pro Git Book](https://git-scm.com/images/progit2.png)](https://git-scm.com/book/)
-
-[GitHub Hello World](https://guides.github.com/activities/hello-world/) Do code management on the web, no CLI needed
 
 * For people who use https, how to avoid keep entering your password [Git - Credential Storage](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
