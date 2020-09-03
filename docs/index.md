@@ -1,7 +1,8 @@
 # Git from the PowerShell Prompt
 
-These notes support a demonstration and talk that introduces PowerShell users to Git and version control concepts.
-Links to more complete material are provided
+These notes support a demonstration and talk that introduces PowerShell users to Git
+and version control concepts.
+An hour talk is not very long and these notes are brief, so links to more complete material are provided.
 
 ## Introduction
 
@@ -35,7 +36,7 @@ Alec is an IT geek who currently works as a Developer Advocate at PaperCut Softw
 
 ## What are the problems VCS solves and how?
 
-- It's hard or even impossible to keep track of all our important project files, why they were changed, or create new versions for specific purposes. When we work in a team on different changes to a common set of files the complexity quickly becomes unmanageable.
+- It's hard or even impossible to keep track of all our important project files, why they were changed, or create new versions for specific purposes. When we work in a team on different changes, to a common set of files, the complexity quickly becomes unmanageable.
 
 - [Version Control](https://en.wikipedia.org/wiki/Version_control) is the process of recording the history of changes to files after they are modified. Users can go back in time, get old versions and identify where and why changes were introduced. This means that it’s easier to:
     - protect against changes – accidental or otherwise – and undo a "bad" change
@@ -51,29 +52,38 @@ Alec is an IT geek who currently works as a Developer Advocate at PaperCut Softw
 
 - All version control systems provides developers with some form of database that records the changes to files
 as a set of revisions or snap shots in time
-    - The VCS database is often reffered to as the repository (repo)
+    - The VCS database is often referred  to as the repository (**repo**)
     - Adding a new collection of changes (for instance to fix a specific issue) is called a **commit**
-    - Obtaining the contents of a specifci commit from the repo is referred d to a **checkout**
+    - Obtaining the contents of a specific commit from the repo is referred to a **checkout**
 
-- As well as a powerful tool for the individual developer, it provides a powerful model for cooperation
-in teams and between teams
-
+- As well as a powerful tool for the individual developer, it provides powerful mechanisms for cooperation
+within teams and between teams
 
 ## Installing and configuring Git on Windows
 
-- `Install-Script Install-Git ; Install-Git.ps1 ; Install-Module posh-git ; Import-Module posh-git`
-    - `git`: the Git package for Windows. I prefer to use Chocolatym or download the [installer](https://git-scm.com/download/win).
-    - [`posh-git`](https://github.com/dahlbyk/posh-git/blob/master/README.md): provides tab completion and basic prompt customisation. Supports Windows PowerShell 5.x
-      or PowerShell Core 6+ on all platforms
-- [Git Credential Manager for Windows](https://microsoft.github.io/Git-Credential-Manager-for-Windows/) (manual install at the moment) is also recommended.
-  More info on   credential managers [here](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
-- Set up three important config settings user name, email address, default init branch and editor. For example
+
+- Personally I prefer to install via [Chocolaty](https://chocolatey.org/)
+  - `choco install git poshgit`\
+  - `git`: the Git package for Windows. I prefer to use Chocolaty or download the [installer](https://git-scm.com/download/win).
+  - [`posh-git`](https://github.com/dahlbyk/posh-git/blob/master/README.md): provides tab completion and
+    basic prompt customisation. Supports Windows PowerShell 5.x or PowerShell Core 6+ on all platforms
+
+- Can also use PowereShell install, e.g. `Install-Script Install-Git ; Install-Git.ps1 ; Install-Module posh-git ; Import-Module posh-git`
+
+- Also recommended,
+  [Git Credential Manager for Windows](https://microsoft.github.io/Git-Credential-Manager-for-Windows/) (manual install at the moment) is also recommended.
+  More info on credential managers [here](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
+
+- Set up some important config settings user name, email address, default init branch and editor. For example
     - `git config --global user.name "Alec Clews"`
     - `git config --global init.defaultBranch main` (Needs Git 2.28 or above, more info [here](https://blog.papercut.com/renaming-the-git-master-branch/))
     - `git config --global core.editor "code --wait"` ([VS Code](https://code.visualstudio.com/) example)
     - `git config --global core.autocrlf input` so that you [play nice with UNIX style line endings](https://code.visualstudio.com/docs/remote/troubleshooting#_resolving-git-line-ending-issues-in-containers-resulting-in-many-modified-files)
-    - More about setting `user.email`later
+  
+    - **Note**: Most guides now suggest setting `user.email`, but we will do that later
+
 - Your config settings are stored in `$env:USERPROFILE\.gitconfig`
+
 - Want extra fancy? See [https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx](https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx)
 
 ## A high level overview of Git
@@ -127,7 +137,7 @@ The further information section below provides resources to take you further
     - `clone`  clones the complete history of a remote project. You can now work on a running project. For example, let's clone the Git repo for these examples onto our workstation
     - `git clone https://github.com/alecthegeek/git-from-powershell.git`
 
-- [add](https://git-scm.com/docs/git-add) et al.
+- [add](https://git-scm.com/docs/git-add) (plus `rm` and `mv`).
 
     Adding changes to a Git repo is a two stage process. All changes are staged in the index, before they’re committed into the repo.
 
@@ -171,4 +181,3 @@ The further information section below provides resources to take you further
 
 [![Pro Git Book](https://git-scm.com/images/progit2.png)](https://git-scm.com/book/)
 
-* For people who use https, how to avoid keep entering your password [Git - Credential Storage](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
