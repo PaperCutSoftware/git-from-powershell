@@ -181,17 +181,23 @@ The further information section below provides resources to take you further
   - To create a new branch use `git checkout -b new-branch-name`
 
   - To move you working copy to another point in history use `git checkout <history reference>` where the `history reference` is the name of an exiting branch,
-    a tag, or some other reference to a previous commit the repo history
+    a tag, or some other reference to a previous commit the repo history.
 
-  `HEAD` is the pointer to the current state of the working copy in source control, but **without any changes you may have made in your working copy**. Git will often tell you about `HEAD`
+  Note: `HEAD` is the pointer to the current state of the working copy in source control, but **without any changes you may have made in your working copy**. Git will often tell you about `HEAD`
 
 - [`pull`](https://www.git-scm.com/docs/git-pull)
 
-    See also [`fetch`](https://www.git-scm.com/docs/git-fetch)
+    The `pull` command downloads **and merges** changes from another [remote](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes) repository, usually the upstream "origin" repository hosted on GitHub, or a similar service.
+
+    See also [`fetch`](https://www.git-scm.com/docs/git-fetch) which downloads the changes, but does **not** merge the remote changes.
 
 - [`merge`](https://www.git-scm.com/docs/git-merge)
 
-  see also [`branch`](https://www.git-scm.com/docs/git-branch)
+  Take the contents of two branches (the content must exist in your local repo) and combines them into single branch.
+  Git will do it's best, but will need help to resolve conflicts if changes on lines overlap.
+  More details [here](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging).
+
+  See also [`branch`](https://www.git-scm.com/docs/git-branch)
 
 ## Storing and sharing your files on GitHub
 
