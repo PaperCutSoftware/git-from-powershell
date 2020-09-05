@@ -221,4 +221,6 @@ There are many links to help you discover the details.
 
 [![Video Playlist](https://img.youtube.com/vi/WBg9mlpzEYU/0.jpg)](https://www.youtube.com/playlist?list=PLwNoYdA7KMWn0eLRG6lvp2Ir2npoCjRth "A series of short videos introducing Git on PowerShell")
 
+- The Pro Git Book. Read online for free or buy a dead tree version
+
 [![Pro Git Book](https://git-scm.com/images/progit2.png)](https://git-scm.com/book/)
