@@ -43,10 +43,11 @@ Alec is an IT geek who currently works as a Developer Advocate at PaperCut Softw
 
 - It's hard or even impossible to keep track of all our important project files, why they were changed, or create new versions for specific purposes. When we work in a team on different changes, to a common set of files, the complexity quickly becomes unmanageable.
 
-- [Version Control](https://en.wikipedia.org/wiki/Version_control) is the process of recording the history of changes to files after they are modified. Users can go back in time, get old versions and identify where and why changes were introduced. This means that it’s easier to:
-  - protect against changes – accidental or otherwise – and undo a "bad" change
+- [Version Control](https://en.wikipedia.org/wiki/Version_control) is the process of recording the history of changes to files. Users can go back in time, retrieve old versions and identify where and why changes were introduced. This means that it’s easier to:
+  - protect against unnessary changes and undo a "bad" change
   - track down problems and retrofit fixes to previous versions of files
-  - support multiple, simultaneous, changes to a common set of project files (parallel development)
+  - support multiple, simultaneous, changes to a common set of project files (parallel development) and release different versions
+  of the same product from a common code base
   - retrieve an older set of files (if requested by a customer or manager, for example)
 
 - Version Control Systems (VCS) are not just for developers
