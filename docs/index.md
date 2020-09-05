@@ -67,10 +67,10 @@ within teams and between teams
 ## Installing and configuring Git on Windows
 
 - Personally I prefer to install via [Chocolaty](https://chocolatey.org/)
-  - `choco install git poshgit`\
-  - `git`: the Git package for Windows. I prefer to use Chocolaty or download the [installer](https://git-scm.com/download/win).
-  - [`posh-git`](https://github.com/dahlbyk/posh-git/blob/master/README.md): provides tab completion and
-    basic prompt customisation. Supports Windows PowerShell 5.x or PowerShell Core 6+ on all platforms
+  - `choco install git poshgit`
+    - `git`: the Git package for Windows. I prefer to use Chocolaty or download the [installer](https://git-scm.com/download/win).
+    - [`posh-git`](https://github.com/dahlbyk/posh-git/blob/master/README.md): provides tab completion and
+      basic prompt customisation. Supports Windows PowerShell 5.x or PowerShell Core 6+ on all platforms
 
 - Can also use PowerShell Module install, e.g. `Install-Script Install-Git ; Install-Git.ps1 ; Install-Module posh-git ; Import-Module posh-git`
 
@@ -82,9 +82,9 @@ within teams and between teams
   - `git config --global user.name "Alec Clews"`
   - `git config --global init.defaultBranch main` (Needs Git 2.28 or above, more info [here](https://blog.papercut.com/renaming-the-git-master-branch/))
   - `git config --global core.editor "code --wait"` ([VS Code](https://code.visualstudio.com/) example)
-  - `git config --global core.autocrlf input` so that you [play nice with UNIX style line endings](https://code.visualstudio.com/docs/remote/troubleshooting#_resolving-git-line-ending-issues-in-containers-resulting-in-many-modified-files)
+  - `git config --global core.autocrlf input` so that you [play nice with UNIX style line endings](https://code.visualstudio.com/docs/remote/troubleshooting#_resolving-git-line-ending-issues-in-containers-resulting-in-many-modified-files).
   
-  - **Note**: Most guides now suggest setting `user.email`, but we will do that later
+  **Note**: Most guides now suggest you configure `user.email` as well, but we will do that later.
 
 - Your config settings are stored in `$env:USERPROFILE\.gitconfig`
 
@@ -95,23 +95,25 @@ within teams and between teams
 - Git runs on Windows, MacOS, and Linux
 
 - Git provides each developer with a local repository (repo):
-  - To keep a complete history of all the files in our project, the changes that occurred over time
-  - The ability to create branches with unique sets of isolated changes
-  - Commands to add new changes and recover old versions
+  - Keeps a complete history of all the files in our project, the changes that occurred over time
+  - The repo can manage branches with unique sets of isolated changes
+  
+- Git provides many commands to add new changes, recover old versions and retrieve historical data
 
 - Each Git repo can connect and share code with other repos from the same project
 
 - Git can handle large numbers of files (for example the GNU/Linux kernel source code). However if you have very large binary files then Git (or other general purpose VCS tools) may not be your best choice, but see [Git Large File Storage](https://git-lfs.github.com/).
 
 - Technically Git repositories have a peer to peer relationship.
-  In practice developers commit to a single upstream repository and
+  In practice developers usually commit to a single upstream repository and
   multiple [workflows](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows) can be build on top of this model.
+  All changes can be shared with other repos as needed, usually to an "upstream" repo (by convention called `origin`)
 
 - Git is distributed and each repository clone has a (mostly) complete record of all changes
 
 - Git repos either manage a working copy (e.g. a directory of project files on a developers workstation),
-  or are bare repos (for instance located on GitHub) used to exchange changes between working copies and project a whole of project view.
-  - c.f. The [Subversion](https://subversion.apache.org/) VCS (and many others) is a centralised system with a single repo that all developers connect to make changes
+  or are bare repos (for instance located on GitHub) used to exchange changes between working copies and provide a "whole of project" view.
+  - c.f. The [Subversion](https://subversion.apache.org/) VCS (and many others) is a centralised system with a single repo that all developers connect with to make changes
 
 - Your local repo database is stored in `.git`, don't worry about it for now
 
@@ -119,7 +121,6 @@ within teams and between teams
 
 - Git maintains information about the other repos that it shares changes with in [remote](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes) tracking branches
 
-- All changes can be shared with other repos as needed, usually to an "upstream" repo (by convention called `origin`)
 
 - Code sharing sites like [GitLab](https://gitlab.com/), [GitHub](https://github.com/), and [BitBucket](https://bitbucket.org/) provide facilities for developers to co-operate across the Internet
 
@@ -132,7 +133,7 @@ There are many commands and a myriad of options so it can seem a little overwhel
 
 Note that the Git CLI follows UNIX/Linux conventions, not PowerShell.
 
-The further information section below provides resources to take you further
+There are many links to help you discover the details.
 
 ### Important commands
 
@@ -154,6 +155,10 @@ The further information section below provides resources to take you further
 
     **Note: ALL changes, not just new files, need to be added to staged into the Index before they can be committed**
 
+    `git add <file-name>` or
+
+    `git add <directory-name>` to add the changes in a directory tree.
+
     Files can be renamed or moved with [`git mv ...`](https://git-scm.com/docs/git-mv), and deleted with [`git rm ...`](https://git-scm.com/docs/git-rm).
 
 - [`commit`](https://www.git-scm.com/docs/git-commit)
@@ -161,14 +166,14 @@ The further information section below provides resources to take you further
   After a changes has been assembled (staged) in the index (using `git add`, `git mv`, or `git rm`) the change must be
   committed into the repo with the [`git commit`](https://git-scm.com/docs/git-commit).
 
-  Notes:
+  Note:
 
   1. **Before** committing your changes
 
-     1. run any tests you have to make sure the change is correct
-     2. `pull` (or `fetch` and `merge`) any recent changes from your remote repositories (more on `pull` later)
+     1. `pull` (or `fetch` and `merge`) any recent changes from your remote repositories (more on `pull` later)
+     2. run any tests you have to make sure the change is correct
 
-  2. Provide a [useful commit message](https://chris.beams.io/posts/git-commit/)
+  2. During the commit operation provide a [useful commit message](https://chris.beams.io/posts/git-commit/)
   > a well-crafted Git commit message is the best way to communicate context about a change to
   > fellow developers (and indeed to [our] future selves).
   > A diff will tell you what changed, but only the commit message can properly tell you why
@@ -178,10 +183,11 @@ The further information section below provides resources to take you further
   
   The `git checkout` command allows you to move the current `HEAD` to another point in the repo history **or** create a new branch
 
-  - To create a new branch use `git checkout -b new-branch-name`
-
   - To move you working copy to another point in history use `git checkout <history reference>` where the `history reference` is the name of an exiting branch,
     a tag, or some other reference to a previous commit the repo history.
+
+  - To create a new branch use `git checkout -b new-branch-name`
+
 
   Note: `HEAD` is the pointer to the current state of the working copy in source control, but **without any changes you may have made in your working copy**. Git will often tell you about `HEAD`
 
