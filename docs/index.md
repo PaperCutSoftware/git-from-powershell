@@ -213,30 +213,27 @@ The [GitHub](https://github.com) website provides [SaaS](https://en.wikipedia.or
 1. Keep your local project repos on your workstation
 2. Store the upstream [bare](https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server) project repos on GitHub (or some other similar SaaS service)
 
-You can install the GitHub CLI ([`gh`](https://cli.github.com/)) tool via Chocolaty
+GitHub upstream repos can be managed from the PowerShell prompt
+
+Install the GitHub CLI ([`gh`](https://cli.github.com/)) tool via Chocolaty
 
 ```
 choco install gh
 ```
 
-We'll skip the Oauth demo (you will need a GitHub account)
-
-Now you can add your project to GitHub
-
-Create an empty public repo and link it to the repo on our workstation
+Now you can add your current project to GitHub
 
 ```
 gh repo create --public
 ```
 
-Push our code to GitHub
+Push project code to GitHub
 
 ```
 git push --set-upstream origin main
 ```
 
-Now open [`start https://github.com/<userName>/git-demo`](https://github.com/alecthegeek/git-demo)
-
+Now open the repository URL On GitHub.
 
 ## What to read or watch next
 

@@ -147,4 +147,7 @@ __Create a special version of Epson plugin__
 ## Publish our work on GitHub
 
 1. Create an account on GitHib
-2. 
+2. Make sure GitHub CLI tool is installed (`choco install gh`)
+3. Create repo from command line`gh repo create --public`
+4. Push our code to GitHub `git push --set-upstream origin main`
+5. Now open [`start https://github.com/<userName>/git-demo`](https://github.com/alecthegeek/git-demo)
