@@ -28,7 +28,7 @@ All these settings are stored in `~/.gitconfig`
 6. `Get-ChildItem`
 7. `Get-ChildItem -Force`
 8. `git status`
-9.  `git add <file>`
+9. `git add <file>`
 10. `git status`
 11. `git commit`
 12. OOps -- `git log`
@@ -46,12 +46,18 @@ For example
 
 1. `Write-Output "/.vscode/" > .gitignore`
 2. `git status`
-
-Now `.vscode` is ignored, but `.gitignore` is untracked
-
+   Now `.vscode` is ignored, but `.gitignore` is not tracked
 3. `git add .gitignore`
 4. `git commit -m "Added gitignore file"`
 5. `git status`
+
+It's normal, good practice, to add the `.gitignore` file to the project repo.
+
+However you should also configure a "[`core.excludesfile`](https://stackoverflow.com/a/7335487)"
+config setting with a list of your local
+IDE and editor specific "cruft" files that others do not need to be aware of.
+
+The project `.gitignore` is then for files that everyone will see (e.g. build artefacts)
 
 ## Make a change to our project
 
@@ -67,13 +73,13 @@ Now `.vscode` is ignored, but `.gitignore` is untracked
 
 ## Use `git rm` and `git mv`
 
-**Setup**
+### Setup
 
 1. Add a spurious file `Write-Output "some stuff" > file2`
 2. `git add file2`
 3. `git commit -m "Silly file"`
 
-**Let's fix it and rename our script**
+### Now let's fix it and rename our script
 
 1. Stage the file delete with `git rm file2`
 2. Rename the report file with `git mv report.ps1 papercut-report.ps1`
