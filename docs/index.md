@@ -23,7 +23,7 @@ Things we'll talk about
 - What are the problems Version Control Software (VCS) solves and how?
 - A high level overview of Git
 - Installing and configuring Git on Windows
-- The seven everyday Git commands you need on the PowerShell prompt
+- The ~~seven~~ first nine everyday Git commands you need on the PowerShell prompt
 - Storing and sharing your files on GitHub
 - What to read next
 
@@ -35,13 +35,13 @@ In the following explanations we will talk about developers and that means **you
 
 About Alec
 
-Alec is an IT geek who currently works as a Developer Advocate at PaperCut Software in Melbourne, Australia. He's been using computers since the late '70s (an ICL 2904 mainframe) and he was a MS-DOS batch file (and later UNIX shell) wizard. More recently Alec has been learning PowerShell, he always has Windows Terminal open with both a PowerShell and WSL2 bash prompt available. Recently he installed VS Code on his arm64 Chrome OS tablet
+[Alec](https://github.com/alecthegeek/) is an IT geek who currently works as a Developer Advocate at [PaperCut Software](https://www.papercut.com/) in [Melbourne](https://en.wikipedia.org/wiki/Melbourne), Australia. He's been using computers since the late '70s (an ICL 2904 mainframe) and he was a MS-DOS batch file (and later UNIX shell) wizard. More recently Alec has been learning PowerShell, he always has Windows Terminal open with both a PowerShell and WSL2 Bash prompt available. Recently he installed VS Code on his ARM64 Chrome OS tablet
 
 <!-- markdownlint-disable MD026 -->
 ## What are the problems VCS solves and how?
 <!-- markdownlint-enable MD026 -->
 
-- It's hard or even impossible to keep track of all our important project files, why they were changed, or create new versions for specific purposes. When we work in a team on different changes, to a common set of files, the complexity quickly becomes unmanageable.
+- It's hard, or even impossible, to keep track of all our important project files, why they were changed, or create new versions for specific purposes. When we work in a team on different changes to a common set of files, the complexity quickly becomes unmanageable.
 
 - [Version Control](https://en.wikipedia.org/wiki/Version_control) is the process of recording the history of changes to files. Users can go back in time, retrieve old versions and identify where and why changes were introduced. This means that it’s easier to:
   - protect against unnessary changes and undo a "bad" change
@@ -55,10 +55,11 @@ Alec is an IT geek who currently works as a Developer Advocate at PaperCut Softw
   - People who need to work together
   - Organisations who need to manage content or satisfy compliance requirements
 
-- All version control systems provides developers with some form of database that records the changes to files
+- All modern version control systems provides developers with some form of database that records the changes to files
 as a set of revisions or snap shots in time
   - The VCS database is often referred  to as the repository (**repo**)
   - Adding a new collection of changes (for instance to fix a specific issue) is called a **commit**
+  - Developers need to provide sensible information about the commit for VCS to be effective
   - Obtaining the contents of a specific commit from the repo is referred to a **checkout**
 
 - As well as a powerful tool for the individual developer, it provides powerful mechanisms for cooperation
@@ -72,10 +73,10 @@ within teams and between teams
     - [`posh-git`](https://github.com/dahlbyk/posh-git/blob/master/README.md): provides tab completion and
       basic prompt customisation. Supports Windows PowerShell 5.x or PowerShell Core 6+ on all platforms
 
-- Can also use PowerShell Module install, e.g. `Install-Script Install-Git ; Install-Git.ps1 ; Install-Module posh-git ; Import-Module posh-git`
+- Can also use PowerShell Module install, e.g. `Install-Script Install-Git ; Install-Git.ps1 ; Install-Module posh-git ; Import-Module posh-git`. However the Git Module does not present the standard CLI experience.
 
 - Also recommended,
-  [Git Credential Manager for Windows](https://microsoft.github.io/Git-Credential-Manager-for-Windows/) (manual install at the moment) is also recommended.
+  [Git Credential Manager for Windows](https://microsoft.github.io/Git-Credential-Manager-for-Windows/) (manual install at the moment).
   More info on credential managers [here](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
 
 - Set up some important config settings user name, email address, default init branch and editor. For example
@@ -84,11 +85,11 @@ within teams and between teams
   - `git config --global core.editor "code --wait"` ([VS Code](https://code.visualstudio.com/) example)
   - `git config --global core.autocrlf input` so that you [play nice with UNIX style line endings](https://code.visualstudio.com/docs/remote/troubleshooting#_resolving-git-line-ending-issues-in-containers-resulting-in-many-modified-files).
   
-  **Note**: Most guides now suggest you configure `user.email` as well, but we will do that later.
+  **Note**: Most guides now suggest you configure `user.email` at the same, but we will do that later.
 
 - Your config settings are stored in `$env:USERPROFILE\.gitconfig`
 
-- Want extra fancy? See [https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx](https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx)
+- Want extra fancy prompt pimping? See [How to make a pretty prompt in Windows Terminal with Powerline, Nerd Fonts, Cascadia Code, WSL, and oh-my-posh](https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx)
 
 ## A high level overview of Git
 
@@ -100,29 +101,28 @@ within teams and between teams
   
 - Git provides many commands to add new changes, recover old versions and retrieve historical data
 
-- Each Git repo can connect and share code with other repos from the same project
+- Each Git repo can connect and share code with other repos managing the same project. The action of creating a local repo based on an existing project is referred to as cloning
 
-- Git can handle large numbers of files (for example the GNU/Linux kernel source code). However if you have very large binary files then Git (or other general purpose VCS tools) may not be your best choice, but see [Git Large File Storage](https://git-lfs.github.com/).
+- Because Git is distributed each repository clone has a (mostly) complete record of all changes
+
+- But as repos are cloned amongst multiple users each repo may have their own unique history.
+
+- Git maintains information about the other repos that it shares changes with in [remote](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes) tracking branches
+
+- Git can handle large numbers of files (for example the GNU/Linux [kernel source code](https://git.kernel.org/pub/scm/linux/)). However if you have very large binary files then Git (or other general purpose VCS tools) may not be your best choice, but see [Git Large File Storage](https://git-lfs.github.com/).
 
 - Technically Git repositories have a peer to peer relationship.
   In practice developers usually commit to a single upstream repository and
   multiple [workflows](https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows) can be build on top of this model.
   All changes can be shared with other repos as needed, usually to an "upstream" repo (by convention called `origin`)
 
-- Git is distributed and each repository clone has a (mostly) complete record of all changes
+- Code sharing sites like [GitLab](https://gitlab.com/), [GitHub](https://github.com/), and [BitBucket](https://bitbucket.org/) provide facilities for developers to co-operate across the Internet using upstream repositories
 
 - Git repos either manage a working copy (e.g. a directory of project files on a developers workstation),
   or are bare repos (for instance located on GitHub) used to exchange changes between working copies and provide a "whole of project" view.
   - c.f. The [Subversion](https://subversion.apache.org/) VCS (and many others) is a centralised system with a single repo that all developers connect with to make changes
 
-- Your local repo database is stored in `.git`, don't worry about it for now
-
-- Repos are replicated (cloned) amongst multiple users. So each repo has with their own unique history.
-
-- Git maintains information about the other repos that it shares changes with in [remote](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes) tracking branches
-
-
-- Code sharing sites like [GitLab](https://gitlab.com/), [GitHub](https://github.com/), and [BitBucket](https://bitbucket.org/) provide facilities for developers to co-operate across the Internet
+- Your local repo database is stored in `.git` directory, don't worry about it for now
 
 See also [What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F)
 
@@ -183,19 +183,18 @@ There are many links to help you discover the details.
   
   The `git checkout` command allows you to move the current `HEAD` to another point in the repo history **or** create a new branch
 
+  Note: `HEAD` is the pointer to the current state of the working copy in source control, but **without any changes you may have made in your working copy**. Git will often tell you about `HEAD`
+
   - To move you working copy to another point in history use `git checkout <history reference>` where the `history reference` is the name of an exiting branch,
     a tag, or some other reference to a previous commit the repo history.
 
   - To create a new branch use `git checkout -b new-branch-name`
 
-
-  Note: `HEAD` is the pointer to the current state of the working copy in source control, but **without any changes you may have made in your working copy**. Git will often tell you about `HEAD`
-
 - [`pull`](https://www.git-scm.com/docs/git-pull)
 
-    The `pull` command downloads **and merges** changes from another [remote](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes) repository, usually the upstream "origin" repository hosted on GitHub, or a similar service.
+  The `pull` command downloads **and merges** changes from another [remote](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes) repository, usually the upstream "origin" repository hosted on GitHub, or a similar service.
 
-    See also [`fetch`](https://www.git-scm.com/docs/git-fetch) which downloads the changes, but does **not** merge the remote changes.
+  See also [`fetch`](https://www.git-scm.com/docs/git-fetch) which downloads the changes, but does **not** merge the remote changes.
 
 - [`merge`](https://www.git-scm.com/docs/git-merge)
 
@@ -205,9 +204,39 @@ There are many links to help you discover the details.
 
   See also [`branch`](https://www.git-scm.com/docs/git-branch)
 
+Don't forget of course the [`git status`](https://www.git-scm.com/docs/git-status) and [`git log`](https://www.git-scm.com/docs/git-log)
+
 ## Storing and sharing your files on GitHub
 
-[GitHub](https://github.com)
+The [GitHub](https://github.com) website provides [SaaS](https://en.wikipedia.org/wiki/Software_as_a_service) Git hosting. So you
+
+1. Keep your local project repos on your workstation
+2. Store the upstream [bare](https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server) project repos on GitHub (or some other similar SaaS service)
+
+You can install the GitHub CLI ([`gh`](https://cli.github.com/)) tool via Chocolaty
+
+```
+choco install gh
+```
+
+We'll skip the Oauth demo (you will need a GitHub account)
+
+Now you can add your project to GitHub
+
+Create an empty public repo and link it to the repo on our workstation
+
+```
+gh repo create --public
+```
+
+Push our code to GitHub
+
+```
+git push --set-upstream origin main
+```
+
+Now open [`start https://github.com/<userName>/git-demo`](https://github.com/alecthegeek/git-demo)
+
 
 ## What to read or watch next
 

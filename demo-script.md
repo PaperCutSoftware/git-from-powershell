@@ -20,6 +20,7 @@ All these settings are stored in `~/.gitconfig`
 ## Start a new project
 
 1. Empty directory
+   * Set up demo editor snippets with `wget -P .vscode https://raw.githubusercontent.com/PaperCutSoftware/git-from-powershell/main/.vscode/demo-snippets.code-snippets`
 2. Add a first file (ex1)
 3. `Get-ChildItem`
 4. `git status`
@@ -27,7 +28,7 @@ All these settings are stored in `~/.gitconfig`
 6. `Get-ChildItem`
 7. `Get-ChildItem -Force`
 8. `git status`
-9. `git add <file>`
+9.  `git add <file>`
 10. `git status`
 11. `git commit`
 12. OOps -- `git log`
@@ -87,7 +88,7 @@ Now `.vscode` is ignored, but `.gitignore` is untracked
 
 __Create a special version of Epson plugin__
 
-1. Show all our branches `git branch -all`
+1. Show all our branches `git branch --all`
 2. Create a new branch `git checkout -b epson`
 3. Do some work (ex3)
 4. Test
@@ -109,7 +110,7 @@ __Create a special version of Epson plugin__
 4. add and commit `git ci -am "Add more info and make it pretty"`
 5. use `gitk --all` to see branches
 
-##Merge new fancy into Epson version
+## Merge new fancy into Epson version
 
 1. Checkout `epson` branch `git checkout epson`
 2. Merge in changes from master `git merge master`
@@ -120,8 +121,8 @@ __Create a special version of Epson plugin__
 7. `git status`
 8. `git commit -m "made epson version pretty"`
 9. `gitk --all`
-10. Switch back to main `git checkout -`
-11. `gitk -all` -- epson has changes from `main`, but `main` does not have changes from `epson`
+10. Switch back to main `git checkout -` (`-` is an alias for "the previous branch")
+11. `gitk -all` -- `epson` has changes from `main`, but `main` does not have changes from `epson`
 
 ## Rebase Epson changes on top of main
 
