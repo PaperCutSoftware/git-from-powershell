@@ -90,7 +90,7 @@ within teams and between teams
 - Your config settings are stored in `$env:USERPROFILE\.gitconfig`
 
 - Want extra fancy prompt pimping? See [How to make a pretty prompt in Windows Terminal with Powerline, Nerd Fonts, Cascadia Code, WSL, and oh-my-posh](https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx)
-
+ 
 ## A high level overview of Git
 
 - Git runs on Windows, MacOS, and Linux
@@ -99,7 +99,7 @@ within teams and between teams
   - Keeps a complete history of all the files in our project, the changes that occurred over time
   - The repo can manage branches with unique sets of isolated changes
   
-- Git provides many commands to add new changes, recover old versions and retrieve historical data
+- Git provides commands to add new changes, recover old versions and retrieve historical data
 
 - Each Git repo can connect and share code with other repos managing the same project. The action of creating a local repo based on an existing project is referred to as cloning
 
