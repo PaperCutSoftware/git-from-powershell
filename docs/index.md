@@ -8,6 +8,17 @@ An hour talk is not very long and these notes are brief, so links to more comple
 
 Note: This content is written in British English
 
+
+<div class="row">
+  <div class="column">
+    <img src="https://git-scm.com/images/logos/downloads/Git-Logo-2Color.png" alt="Git Logo" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="https://download.microsoft.com/download/9/6/8/968D32C0-EBAC-472C-9CAB-7758366B3AA1/download_files/PowerShell.jpg" alt="PowerShell Hero" style="width:100%">
+  </div>
+</div>
+
+
 ## Introduction
 
 Most folks in IT (application developers, system administrators, security engineers,...) create, and manage, text files of various types all day, every day.
