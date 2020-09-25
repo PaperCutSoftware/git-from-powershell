@@ -88,7 +88,8 @@ within teams and between teams
 
 - Also recommended,
   [Git Credential Manager for Windows](https://microsoft.github.io/Git-Credential-Manager-for-Windows/) (manual install at the moment).
-  More info on credential managers [here](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage)
+  More [general info](https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage) on credential managers and
+  [using Git Credential Manager for Windows with WSL](https://docs.microsoft.com/en-us/windows/wsl/faq#how-do-i-set-up-git-credential-manager-how-do-i-use-my-windows-git-permissions-in-wsl)
 
 - Set up some important config settings user name, email address, default init branch and editor. For example
   - `git config --global user.name "Alec Clews"`
@@ -265,3 +266,6 @@ Now open the repository URL On GitHub.
 - Simple intro to Git cheerpick
 
 [![Git cherry pick tutorial. How to use git cherry-pick](https://img.youtube.com/vi/wIY824wWpu4/0.jpg)](https://youtu.be/wIY824wWpu4)
+
+
+
