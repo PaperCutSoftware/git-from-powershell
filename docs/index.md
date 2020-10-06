@@ -95,9 +95,13 @@ within teams and between teams
   - `git config --global user.name "Alec Clews"`
   - `git config --global init.defaultBranch main` (Needs Git 2.28 or above, more info [here](https://blog.papercut.com/renaming-the-git-master-branch/))
   - `git config --global core.editor "code --wait"` ([VS Code](https://code.visualstudio.com/) example)
-  - `git config --global core.autocrlf input` so that you [play nice with UNIX style line endings](https://code.visualstudio.com/docs/remote/troubleshooting#_resolving-git-line-ending-issues-in-containers-resulting-in-many-modified-files).
+  - `git config --global core.autocrlf input` so that you [play nice with UNIX style line endings](https://code.visualstudio.com/docs/remote/troubleshooting#_resolving-git-line-ending-issues-in-containers-resulting-in-many-modified-files), see also [Git for Windows: Line Endings](https://edwardthomson.com/blog/git_for_windows_line_endings.html) for another solution using `.gitattributes`.
   
-  **Note**: Most guides now suggest you configure `user.email` at the same, but we will do that later.
+  **Note**: Most guides now suggest you configure `user.email` at the same, however if you commit under different identities, for example your company email address and personal email for FLOSS side projects, you need to take some precautions.
+
+  Option 1: Each time you create a new repo create a repo specific config entry with the correct email address. For example (after running `git init`) run `git config user.email fred@gmail.com`. (Note: No `--global` option so it's local to the current repo.) This is approach used in the demonstration. You can even wrap the Git `init` command if you want.
+
+  Option 2: If you use a consistent directory structure then you can use [Conditional Includes](https://edwardthomson.com/blog/git_conditional_includes.html) to configure your email address automagically.
 
 - Your config settings are stored in `$env:USERPROFILE\.gitconfig`
 
