@@ -2,6 +2,9 @@
 
 # Git from the PowerShell Prompt
 
+[![Talk Video](https://img.youtube.com/vi/L2Qe-5MjTX8/0.jpg)](https://www.youtube.com/watch?v=L2Qe-5MjTX8)
+
+
 These notes support a demonstration and talk that introduces PowerShell users to Git
 and version control concepts.
 An hour talk is not very long and these notes are brief, so links to more complete material are provided.
