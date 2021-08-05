@@ -2,9 +2,6 @@
 
 # Git from the PowerShell Prompt
 
-[![Talk Video](https://img.youtube.com/vi/L2Qe-5MjTX8/0.jpg)](https://www.youtube.com/watch?v=L2Qe-5MjTX8)
-
-
 These notes support a demonstration and talk that introduces PowerShell users to Git
 and version control concepts.
 An hour talk is not very long and these notes are brief, so links to more complete material are provided.
@@ -23,6 +20,8 @@ Note: This content is written in British English
 
 
 ## Introduction
+
+[![Talk Video](https://img.youtube.com/vi/L2Qe-5MjTX8/0.jpg)](https://www.youtube.com/watch?v=L2Qe-5MjTX8)
 
 Most folks in IT (application developers, system administrators, security engineers,...) create, and manage, text files of various types all day, every day.
 For example: scripts; data files of various types (such as config settings stored in JSON or CSV files); application source code and so on.
